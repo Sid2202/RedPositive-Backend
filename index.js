@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const app = express()
 var bodyParser = require('body-parser')
 app.use(bodyParser.json())
-const port =5080;
+// const port =5080;
 const cors = require('cors');
 app.use(cors());
 
@@ -47,7 +47,7 @@ app.use(cors());
 const user_data = mongoose.model("user", user);
 
 
-app.post('/api',async(req,res)=>{
+app.post('https://main--phenomenal-syrniki-ccf5ba.netlify.app/api',async(req,res)=>{
     const userItem = new user_data({
         name: req.body.name,
         email: req.body.email,
@@ -59,7 +59,7 @@ app.post('/api',async(req,res)=>{
     res.send('table item added successfully')
 })
 
-app.post('/api/table',async(req,res)=>{
+app.post('https://main--phenomenal-syrniki-ccf5ba.netlify.app/api/table',async(req,res)=>{
     user_data.find().then((doc,err)=>{
         var tableArray = doc
         res.send(tableArray)
@@ -67,13 +67,13 @@ app.post('/api/table',async(req,res)=>{
     // res.send('table: '+tableArray)
 })
 
-app.post('/api/delete',async(req,res)=>{
+app.post('https://main--phenomenal-syrniki-ccf5ba.netlify.app/api/delete',async(req,res)=>{
     var myquery = { _id: req.body._id };
     user_data.deleteOne(myquery)
     .then(res.send("1 document deleted"))
 })
 
 
-app.get('/', (req, res) => res.send('Hello world!'));
+app.get('https://main--phenomenal-syrniki-ccf5ba.netlify.app/', (req, res) => res.send('Hello world!'));
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen("https://main--phenomenal-syrniki-ccf5ba.netlify.app/", () => console.log(`Server running on netlify`));
