@@ -9,6 +9,15 @@ app.use(bodyParser.json())
 // const cors = require('cors');
 // app.use(cors());
 
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
+
 (async () => {
     try {
       await mongoose
