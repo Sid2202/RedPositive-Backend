@@ -6,8 +6,8 @@ const app = express()
 var bodyParser = require('body-parser')
 app.use(bodyParser.json())
 // const port =5080;
-const cors = require('cors');
-app.use(cors());
+// const cors = require('cors');
+// app.use(cors());
 
 (async () => {
     try {
@@ -45,7 +45,6 @@ app.use(cors());
 
 
 const user_data = mongoose.model("user", user);
-
 
 app.post('https://main--phenomenal-syrniki-ccf5ba.netlify.app/api',async(req,res)=>{
     const userItem = new user_data({
