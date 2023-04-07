@@ -6,8 +6,8 @@ const app = express()
 var bodyParser = require('body-parser')
 app.use(bodyParser.json())
 // const port =5080;
-// const cors = require('cors');
-// app.use(cors());
+const cors = require('cors');
+app.use(cors());
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
