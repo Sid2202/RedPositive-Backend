@@ -7,16 +7,9 @@ var bodyParser = require('body-parser')
 app.use(bodyParser.json())
 // const port =5080;
 const cors = require('cors');
-app.use(cors());
-
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-  });
+app.use(cors({
+    origin: 'https://main--splendorous-cranachan-7cc9f8.netlify.app/'
+  }));
 
 (async () => {
     try {
@@ -55,7 +48,7 @@ app.use((req, res, next) => {
 
 const user_data = mongoose.model("user", user);
 
-app.post('https://main--phenomenal-syrniki-ccf5ba.netlify.app/api',async(req,res)=>{
+app.post('/api',async(req,res)=>{
     const userItem = new user_data({
         name: req.body.name,
         email: req.body.email,
@@ -67,7 +60,7 @@ app.post('https://main--phenomenal-syrniki-ccf5ba.netlify.app/api',async(req,res
     res.send('table item added successfully')
 })
 
-app.post('https://main--phenomenal-syrniki-ccf5ba.netlify.app/api/table',async(req,res)=>{
+app.post('/api/table',async(req,res)=>{
     user_data.find().then((doc,err)=>{
         var tableArray = doc
         res.send(tableArray)
@@ -75,13 +68,13 @@ app.post('https://main--phenomenal-syrniki-ccf5ba.netlify.app/api/table',async(r
     // res.send('table: '+tableArray)
 })
 
-app.post('https://main--phenomenal-syrniki-ccf5ba.netlify.app/api/delete',async(req,res)=>{
+app.post('/api/delete',async(req,res)=>{
     var myquery = { _id: req.body._id };
     user_data.deleteOne(myquery)
     .then(res.send("1 document deleted"))
 })
 
 
-app.get('https://main--phenomenal-syrniki-ccf5ba.netlify.app/', (req, res) => res.send('Hello world!'));
+app.get('/', (req, res) => res.send('Hello world!'));
 
-app.listen("https://main--phenomenal-syrniki-ccf5ba.netlify.app/", () => console.log(`Server running on netlify`));
+app.listen("/", () => console.log(`Server running on netlify`));
