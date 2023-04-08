@@ -11,68 +11,68 @@ app.use(cors({
     origin: 'https://main--splendorous-cranachan-7cc9f8.netlify.app/'
   }));
 
-(async () => {
-    try {
-      await mongoose
-        .connect("mongodb+srv://sidpatil2209:sidhanti22@cluster0.gmgirpg.mongodb.net/test", { useNewUrlParser: true })
-        .then(console.log("Connected to MongoDB"));
-    } catch (error) {
-      console.log("Error connecting to mongodb" + error);
-    }
-  })();
+// (async () => {
+//     try {
+//       await mongoose
+//         .connect("mongodb+srv://sidpatil2209:sidhanti22@cluster0.gmgirpg.mongodb.net/test", { useNewUrlParser: true })
+//         .then(console.log("Connected to MongoDB"));
+//     } catch (error) {
+//       console.log("Error connecting to mongodb" + error);
+//     }
+//   })();
 
 
-    const user = new mongoose.Schema({
-    name: {
-        type : 'string',
-        required : true
-    },
-    userID :{
-        type :mongoose.Schema.Types.ObjectId,
-        ref : 'User'
-    },
-    email: {
-        type : 'string',
-        required : true
-    },
-    contact: {
-        type : 'string',
-        required : true
-    },
-    hobby: {
-        type : 'string',
-        required : true
-    },
-  });
+//     const user = new mongoose.Schema({
+//     name: {
+//         type : 'string',
+//         required : true
+//     },
+//     userID :{
+//         type :mongoose.Schema.Types.ObjectId,
+//         ref : 'User'
+//     },
+//     email: {
+//         type : 'string',
+//         required : true
+//     },
+//     contact: {
+//         type : 'string',
+//         required : true
+//     },
+//     hobby: {
+//         type : 'string',
+//         required : true
+//     },
+//   });
 
 
-const user_data = mongoose.model("user", user);
+// const user_data = mongoose.model("user", user);
 
-app.post('/api',async(req,res)=>{
-    const userItem = new user_data({
-        name: req.body.name,
-        email: req.body.email,
-        contact: req.body.contact,
-        hobby: req.body.hobby
-    })
-    userItem.save()
-    .then(console.log("row added successfully"))
-    res.send('table item added successfully')
-})
+// app.post('/api',async(req,res)=>{
+//     const userItem = new user_data({
+//         name: req.body.name,
+//         email: req.body.email,
+//         contact: req.body.contact,
+//         hobby: req.body.hobby
+//     })
+//     userItem.save()
+//     .then(console.log("row added successfully"))
+//     res.send('table item added successfully')
+// })
 
-app.post('/api/table',async(req,res)=>{
-    user_data.find().then((doc,err)=>{
-        var tableArray = doc
-        res.send(tableArray)
-    })
-    // res.send('table: '+tableArray)
-})
+// app.post('/api/table',async(req,res)=>{
+//     user_data.find().then((doc,err)=>{
+//         var tableArray = doc
+//         res.send(tableArray)
+//     })
+//     // res.send('table: '+tableArray)
+// })
 
-app.post('/api/delete',async(req,res)=>{
-    var myquery = { _id: req.body._id };
-    user_data.deleteOne(myquery)
-    .then(res.send("1 document deleted"))
-})
+// app.post('/api/delete',async(req,res)=>{
+//     var myquery = { _id: req.body._id };
+//     user_data.deleteOne(myquery)
+//     .then(res.send("1 document deleted"))
+// })
 
 
 app.get('/', (req, res) => res.send('Hello world!'));
